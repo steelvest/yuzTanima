@@ -18,6 +18,17 @@ class ViewController: UIViewController {
 
     @IBAction func signInClick(_ sender: Any) {
         
+        let autContext = LAContext()
+        var error : NSError?
+        if autContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            autContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Is It you?") { (success, error) in
+                if success == true {
+                    self.performSegue(withIdentifier: "toSecondVC", sender: nil)
+                } else {
+                    self.myLabel.text = "Hata Mesajı"
+                }
+            }
+        }
         
     }
     
