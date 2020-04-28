@@ -23,9 +23,15 @@ class ViewController: UIViewController {
         if autContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             autContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Is It you?") { (success, error) in
                 if success == true {
-                    self.performSegue(withIdentifier: "toSecondVC", sender: nil)
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "toSecondVC", sender: nil)
+                    }
+                    
                 } else {
-                    self.myLabel.text = "Hata Mesajı"
+                    DispatchQueue.main.async {
+                        self.myLabel.text = "Hata Mesajı"
+                    }
+                    
                 }
             }
         }
